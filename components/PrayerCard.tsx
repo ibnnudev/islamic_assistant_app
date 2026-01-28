@@ -29,11 +29,11 @@ export default function PrayerCard({ nextPrayer, timeRemaining }: PrayerCardProp
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-full backdrop-blur-sm">
                         <Clock className="w-3.5 h-3.5" />
-                        <span className="text-[10px] font-bold uppercase tracking-widest">Next Prayer</span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest">Waktu Shalat</span>
                     </div>
                     <div className="flex items-center gap-1.5 opacity-80">
                         <span className="text-[10px] font-bold uppercase tracking-widest">
-                            {new Date().toLocaleDateString('en-US', { weekday: 'long' })}
+                            {new Date().toLocaleDateString('id-ID', { weekday: 'long' })}
                         </span>
                     </div>
                 </div>
@@ -41,7 +41,11 @@ export default function PrayerCard({ nextPrayer, timeRemaining }: PrayerCardProp
                 <div className="flex justify-between items-end">
                     <div className="space-y-1">
                         <h2 className="text-5xl font-black tracking-tighter italic">
-                            {nextPrayer.name}
+                            {nextPrayer.name === 'Fajr' ? 'Subuh' :
+                                nextPrayer.name === 'Dhuhr' ? 'Zuhur' :
+                                    nextPrayer.name === 'Asr' ? 'Ashar' :
+                                        nextPrayer.name === 'Maghrib' ? 'Maghrib' :
+                                            nextPrayer.name === 'Isha' ? 'Isya' : nextPrayer.name}
                         </h2>
                         <p className="text-xl font-arabic opacity-80">
                             {nextPrayer.arabicName}
@@ -52,14 +56,14 @@ export default function PrayerCard({ nextPrayer, timeRemaining }: PrayerCardProp
                             {formattedTime}
                         </p>
                         <p className="text-[10px] uppercase font-bold tracking-widest opacity-60">
-                            Entry Time
+                            Waktu Masuk
                         </p>
                     </div>
                 </div>
 
                 <div className="flex flex-col items-center justify-center py-4 bg-white/10 rounded-[32px] backdrop-blur-sm border border-white/5 relative group overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] opacity-60 mb-1">Time Remaining</span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] opacity-60 mb-1">Dikit Lagi Adzan</span>
                     <motion.p
                         key={timeRemaining}
                         initial={{ opacity: 0.5, scale: 0.98 }}

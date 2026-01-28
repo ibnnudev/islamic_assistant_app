@@ -15,7 +15,7 @@ const PRESETS: TasbihPreset[] = [
     { id: 'pagi', name: 'Dzikir Pagi', target: 100 },
     { id: 'petang', name: 'Dzikir Petang', target: 100 },
     { id: 'fatimah', name: 'Tasbih Fatimah', target: 33 },
-    { id: 'free', name: 'Free Mode', target: 0 },
+    { id: 'free', name: 'Mode Bebas', target: 0 },
 ];
 
 export default function TasbihCounter() {
@@ -43,10 +43,12 @@ export default function TasbihCounter() {
 
     if (!showCounter) {
         return (
-            <div className="p-6 space-y-6">
+            <div className="p-6 space-y-6 pb-32">
                 <div className="space-y-1">
-                    <h2 className="text-2xl font-bold">Tasbih</h2>
-                    <p className="text-sm text-muted-foreground">Select a preset to begin counting</p>
+                    <h2 className="text-3xl font-black tracking-tight text-primary uppercase italic">Tasbih Digital</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                        Mau dzikir apa hari ini? Tenangkan hati dengan menyebut nama-Nya.
+                    </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -54,14 +56,14 @@ export default function TasbihCounter() {
                         <button
                             key={preset.id}
                             onClick={() => startPreset(preset)}
-                            className="flex flex-col items-start p-4 bg-card border rounded-2xl text-left hover:bg-accent/50 transition-all active:scale-95 group"
+                            className="flex flex-col items-start p-4 bg-card border rounded-3xl text-left hover:bg-accent/50 transition-all active:scale-95 group shadow-sm"
                         >
                             <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                                 <Play className="w-5 h-5 fill-current" />
                             </div>
                             <span className="font-bold text-sm">{preset.name}</span>
                             <span className="text-[10px] text-muted-foreground uppercase tracking-widest mt-1">
-                                {preset.target > 0 ? `Target: ${preset.target}` : 'No Target'}
+                                {preset.target > 0 ? `Target: ${preset.target}` : 'Bebas'}
                             </span>
                         </button>
                     ))}
@@ -88,7 +90,7 @@ export default function TasbihCounter() {
                 </span>
                 <button
                     onClick={handleReset}
-                    className="p-2 rounded-full bg-muted/50 hover:bg-muted transition-colors"
+                    className="p-2 rounded-full bg-muted/50 hover:bg-muted transition-colors focus:ring-2 focus:ring-primary/20"
                 >
                     <RotateCcw className="w-5 h-5" />
                 </button>
@@ -132,13 +134,13 @@ export default function TasbihCounter() {
                     >
                         {count}
                     </motion.span>
-                    {activePreset?.target ? (
+                    {activePreset?.target && activePreset.target > 0 ? (
                         <span className="text-sm font-bold text-muted-foreground mt-4">
-                            of {activePreset.target}
+                            dari {activePreset.target}
                         </span>
                     ) : (
                         <span className="text-sm font-bold text-muted-foreground mt-4 italic">
-                            Free Mode
+                            Mode Bebas
                         </span>
                     )}
                 </div>
@@ -146,7 +148,7 @@ export default function TasbihCounter() {
 
             {/* Hint */}
             <div className="absolute bottom-12 text-xs font-medium text-muted-foreground animate-pulse text-center px-10 leading-relaxed uppercase tracking-[0.2em]">
-                Tap anywhere to count
+                Ketuk di mana aja buat hitung
             </div>
         </div>
     );

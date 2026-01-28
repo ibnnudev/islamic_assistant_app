@@ -6,6 +6,7 @@ import { Loader2, AlertCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useSwipeable } from 'react-swipeable';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '@/components/ui/Button';
 
 interface MushafViewProps {
     pageNumber: number;
@@ -56,8 +57,9 @@ export default function MushafView({
         return (
             <div className="flex flex-col items-center justify-center min-h-[60vh] p-4 text-center">
                 <AlertCircle className="w-10 h-10 mb-2 text-destructive" />
-                <h3 className="text-lg font-semibold">Failed to load page</h3>
-                <p className="text-sm text-muted-foreground">Please check your connection and try again.</p>
+                <h3 className="text-lg font-semibold">Waduh, gagal buka Mushaf</h3>
+                <p className="text-sm text-muted-foreground">Cek koneksi internetmu bentar, terus coba lagi ya.</p>
+                <Button onClick={() => window.location.reload()} variant="outline" className="mt-4">Muat Ulang</Button>
             </div>
         );
     }
@@ -76,43 +78,46 @@ export default function MushafView({
     });
 
     return (
-        <div {...handlers} className="w-full flex flex-col relative bg-background">
+        <div {...handlers} className="w-full flex flex-col relative bg-white min-h-screen">
             {/* Sticky Header */}
-            <div className="sticky top-0 z-30 bg-background/90 backdrop-blur-md border-b px-4 py-3 flex justify-between items-center transition-all">
-                <h2 className="text-sm font-bold text-primary uppercase tracking-tighter sm:tracking-widest">
-                    {ayahs[0].surah.englishName}
-                </h2>
-                <div className="px-3 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-bold">
-                    JUZ {ayahs[0].juz}
+            <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b px-6 py-4 flex justify-between items-center transition-all">
+                <div className="flex flex-col">
+                    <h2 className="text-lg font-black text-slate-900 uppercase tracking-tight italic">
+                        {ayahs[0].surah.englishName}
+                    </h2>
+                    <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Surah {ayahs[0].surah.number}</span>
+                </div>
+                <div className="px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-black uppercase tracking-widest border border-emerald-100">
+                    Juz {ayahs[0].juz}
                 </div>
             </div>
 
             <AnimatePresence mode="wait">
                 <motion.div
                     key={pageNumber}
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
-                    transition={{ duration: 0.15 }}
-                    className="p-4 flex flex-col items-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex flex-col items-center"
                 >
-                    {/* Card Container */}
-                    <div className="w-full bg-card text-card-foreground border shadow-sm rounded-xl overflow-hidden min-h-[70vh]">
-                        <div className="p-6 sm:p-8">
+                    {/* Main Reading Area */}
+                    <div className="w-full max-w-2xl bg-white min-h-[80vh]">
+                        <div className="p-6 sm:p-10">
                             {surahGroups.map((group, groupIndex) => (
-                                <div key={group.surah.number} className={cn("mb-6", groupIndex > 0 && "mt-10 pt-6 border-t")}>
+                                <div key={group.surah.number} className={cn("mb-12", groupIndex > 0 && "mt-16")}>
 
                                     {/* Surah Title Banner */}
                                     {group.ayahs[0].numberInSurah === 1 && (
-                                        <div className="text-center mb-6">
-                                            <div className="inline-block px-8 py-2 border-2 border-primary/20 rounded-lg bg-primary/5">
-                                                <h3 className="text-xl font-bold font-arabic text-primary">
+                                        <div className="text-center mb-10">
+                                            <div className="inline-block px-10 py-3 border-b-2 border-emerald-100 bg-emerald-50/30 rounded-t-3xl">
+                                                <h3 className="text-3xl font-black font-arabic text-emerald-900">
                                                     سورة {group.surah.name}
                                                 </h3>
                                             </div>
 
                                             {group.surah.number !== 9 && group.surah.number !== 1 && (
-                                                <div className="mt-6 text-2xl font-arabic text-foreground opacity-90">
+                                                <div className="mt-10 text-4xl font-arabic text-slate-800 leading-relaxed">
                                                     {BISMILLAH}
                                                 </div>
                                             )}
@@ -121,8 +126,8 @@ export default function MushafView({
 
                                     {/* Quran Text Flow */}
                                     <div
-                                        className="text-right dir-rtl leading-[3.5rem] py-2 font-arabic"
-                                        style={{ fontSize: '1.75rem' }}
+                                        className="text-right dir-rtl leading-[4.5rem] py-4 font-arabic text-slate-900 selection:bg-emerald-100"
+                                        style={{ fontSize: '2.25rem' }} // text-4xl equivalent for better readability
                                     >
                                         {group.ayahs.map((ayah) => {
                                             const isNewSurahStart = ayah.numberInSurah === 1 && ayah.surah.number !== 1 && ayah.surah.number !== 9;
@@ -139,17 +144,17 @@ export default function MushafView({
                                                     key={ayah.number}
                                                     onClick={() => setActiveAyahId(isActive ? null : ayah.number)}
                                                     className={cn(
-                                                        "cursor-pointer transition-all duration-200 box-decoration-clone inline rounded-md px-1 py-1",
+                                                        "cursor-pointer transition-all duration-300 box-decoration-clone inline rounded-xl px-2 py-2",
                                                         isActive
-                                                            ? "bg-primary/20 text-primary font-medium"
-                                                            : "hover:bg-accent/50"
+                                                            ? "bg-[#d1fae5] shadow-sm shadow-emerald-200/50"
+                                                            : "hover:bg-slate-50"
                                                     )}
                                                 >
                                                     {text}
                                                     {/* Ayah Marker */}
-                                                    <span className="inline-flex items-center justify-center w-8 h-8 mx-1 relative select-none align-middle translate-y-[-2px]">
-                                                        <span className="text-primary/40 text-2xl">۝</span>
-                                                        <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-primary font-sans">
+                                                    <span className="inline-flex items-center justify-center w-10 h-10 mx-2 relative select-none align-middle translate-y-[-4px]">
+                                                        <span className="text-emerald-300 text-3xl">۝</span>
+                                                        <span className="absolute inset-0 flex items-center justify-center text-xs font-black text-emerald-700 font-sans">
                                                             {toArabicNumerals(ayah.numberInSurah)}
                                                         </span>
                                                     </span>
@@ -161,10 +166,11 @@ export default function MushafView({
                             ))}
                         </div>
 
-                        {/* Page Footer */}
-                        <div className="py-4 text-center border-t bg-muted/30">
-                            <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">
-                                Page {pageNumber}
+                        {/* Page Decoration Footer */}
+                        <div className="py-10 text-center flex flex-col items-center gap-4 opacity-40">
+                            <div className="w-16 h-1 bg-slate-100 rounded-full" />
+                            <span className="text-xs font-black text-slate-400 uppercase tracking-[0.4em]">
+                                Halaman {pageNumber}
                             </span>
                         </div>
                     </div>

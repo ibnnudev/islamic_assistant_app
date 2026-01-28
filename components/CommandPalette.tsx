@@ -43,7 +43,7 @@ export function CommandPalette({ open, setOpen }: { open: boolean, setOpen: (ope
                     <Search className="w-5 h-5 text-muted-foreground" />
                     <Command.Input
                         autoFocus
-                        placeholder="Search Surah, Page, or Juz..."
+                        placeholder="Cari Surah, Halaman, atau Juz..."
                         className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground text-sm"
                     />
                     <kbd className="hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
@@ -53,11 +53,11 @@ export function CommandPalette({ open, setOpen }: { open: boolean, setOpen: (ope
 
                 <Command.List className="max-h-[300px] overflow-y-auto p-2 scroll-py-2 pb-4">
                     <Command.Empty className="py-6 text-center text-sm text-muted-foreground">
-                        No results found.
+                        Yah, kaga ketemu...
                     </Command.Empty>
 
-                    <Command.Group heading="Surahs" className="px-2 mb-2">
-                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2 px-2">Surahs</div>
+                    <Command.Group heading="Surah" className="px-2 mb-2">
+                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2 px-2">Surah</div>
                         {SURAHS.map((surah) => (
                             <Command.Item
                                 key={`surah-${surah.number}`}
@@ -71,19 +71,19 @@ export function CommandPalette({ open, setOpen }: { open: boolean, setOpen: (ope
                         ))}
                     </Command.Group>
 
-                    <Command.Group heading="Navigation" className="px-2">
-                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2 px-2">Shortcuts</div>
+                    <Command.Group heading="Akses Cepat" className="px-2">
+                        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider mb-2 px-2">Akses Cepat</div>
                         <Command.Item onSelect={() => runCommand(() => router.push('/quran/read/1'))} className="flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer hover:bg-accent text-sm transition-colors">
                             <FileText className="w-4 h-4 text-primary/60" />
-                            <span>Go to Page 1</span>
+                            <span>Buka Halaman 1</span>
                         </Command.Item>
                         <Command.Item onSelect={() => runCommand(() => router.push('/quran/read/604'))} className="flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer hover:bg-accent text-sm transition-colors">
                             <FileText className="w-4 h-4 text-primary/60" />
-                            <span>Go to Page 604</span>
+                            <span>Buka Halaman 604</span>
                         </Command.Item>
                         <Command.Item onSelect={() => runCommand(() => router.push('/quran/read/1'))} className="flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer hover:bg-accent text-sm transition-colors">
                             <Hash className="w-4 h-4 text-primary/60" />
-                            <span>Go to Juz 30</span>
+                            <span>Buka Juz 30</span>
                         </Command.Item>
                     </Command.Group>
                 </Command.List>

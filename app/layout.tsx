@@ -3,10 +3,11 @@ import { Inter, Amiri } from "next/font/google";
 import "./globals.css";
 import BottomNav from "@/components/BottomNav";
 import AudioPlayer from "@/components/AudioPlayer";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-inter",
 });
 
 const amiri = Amiri({
@@ -16,8 +17,8 @@ const amiri = Amiri({
 });
 
 export const metadata: Metadata = {
-  title: "Sakinah - Your Digital Sanctuary",
-  description: "A beautiful Muslim companion app for prayer times, Qibla direction, Quran reading, and Tasbih counting",
+  title: "Sakinah - Teman Ibadahmu",
+  description: "Bikin ibadah makin khusyuk dan simpel dengan Sakinah. Pantau jadwal shalat, baca Al-Quran, cari kiblat, sampe dzikir, semua ada!",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -34,8 +35,6 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-import QueryProvider from "@/components/providers/QueryProvider";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${amiri.variable} antialiased bg-stone-100`}>
+      <body className={`${inter.variable} ${amiri.variable} antialiased bg-stone-100 font-sans`}>
         <QueryProvider>
           {/* Mobile First Wrapper */}
           <div className="min-h-screen flex justify-center bg-stone-100">

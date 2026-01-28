@@ -21,7 +21,7 @@ export default function AsmaulHusnaPage() {
             <div className="space-y-2">
                 <h1 className="text-3xl font-black tracking-tight text-primary uppercase italic">Asmaul Husna</h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                    The 99 Beautiful Names of Allah (SWT)
+                    99 Nama Allah Sang Pencipta. Mari mengenal-Nya lebih dekat.
                 </p>
             </div>
 

@@ -69,7 +69,7 @@ export default function ReadPage({ params }: ReadPageProps) {
                         disabled={currentPage >= 604}
                     >
                         <ChevronLeft className="w-4 h-4 mr-2" />
-                        Next Page
+                        Berikutnya
                     </Button>
 
                     <Button
@@ -78,7 +78,7 @@ export default function ReadPage({ params }: ReadPageProps) {
                         onClick={() => goToPage(currentPage - 1)}
                         disabled={currentPage <= 1}
                     >
-                        Previous
+                        Sebelumnya
                         <ChevronRight className="w-4 h-4 ml-2" />
                     </Button>
                 </div>

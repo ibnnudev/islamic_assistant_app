@@ -125,10 +125,10 @@ export default function Compass({ userLocation }: CompassProps) {
                     "text-2xl font-bold transition-colors duration-300",
                     aligned ? "text-primary" : "text-foreground"
                 )}>
-                    {aligned ? "Aligned with Kaaba" : `${Math.round(qiblaDir)}° Qibla`}
+                    {aligned ? "Nah, udah pas ke Ka'bah!" : `${Math.round(qiblaDir)}° Ke Ka'bah`}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                    {userLocation ? "Pointing towards Mecca, Saudi Arabia" : "Requesting location..."}
+                    {userLocation ? "Arah lurus ke Makkah, Arab Saudi" : "Nyari lokasi kamu dulu ya..."}
                 </p>
             </div>
 
@@ -138,14 +138,14 @@ export default function Compass({ userLocation }: CompassProps) {
                     className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full font-bold shadow-lg shadow-primary/20 active:scale-95 transition-all"
                 >
                     <ShieldCheck className="w-5 h-5" />
-                    Calibrate Compass
+                    Kalibrasi Kompas
                 </button>
             )}
 
             {permissionGranted && (
                 <div className="flex items-center gap-2 text-xs text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-full">
                     <LocateFixed className="w-3 h-3" />
-                    Compass Active
+                    Kompas Aktif
                 </div>
             )}
         </div>

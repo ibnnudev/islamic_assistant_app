@@ -19,9 +19,9 @@ export default function QuranPage() {
     return (
         <div className="p-6 space-y-8 pb-32">
             <div className="space-y-2">
-                <h1 className="text-3xl font-black tracking-tight text-primary uppercase italic">The Quran</h1>
+                <h1 className="text-3xl font-black tracking-tight text-primary uppercase italic">Al-Quran</h1>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                    Read and study the Noble Quran in Mushaf view.
+                    Tenangkan hati dengan bacaan ayat suci.
                 </p>
             </div>
 
@@ -30,7 +30,7 @@ export default function QuranPage() {
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
                 <input
                     type="text"
-                    placeholder="Search Surah..."
+                    placeholder="Cari Surah apa hari ini?"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     className="w-full pl-12 pr-4 py-4 bg-muted/50 border-none rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 transition-all text-sm font-medium"
@@ -57,12 +57,12 @@ export default function QuranPage() {
                                 {surah.englishName}
                             </h3>
                             <p className="text-[10px] text-muted-foreground uppercase tracking-widest font-medium">
-                                {surah.revelationType} • {surah.numberOfAyahs} Ayahs
+                                {surah.revelationType === 'Meccan' ? 'Makkiyah' : 'Madaniyah'} • {surah.numberOfAyahs} Ayat
                             </p>
                         </div>
 
                         <div className="text-right">
-                            <span className="text-lg font-arabic text-foreground/80 group-hover:text-primary transition-colors">
+                            <span className="text-sm font-medium text-foreground/80 group-hover:text-primary transition-colors">
                                 {surah.name}
                             </span>
                         </div>
